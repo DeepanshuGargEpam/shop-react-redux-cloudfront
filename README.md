@@ -3,7 +3,9 @@ Cloudfront ( automated ): https://d5gmxpfweshkm.cloudfront.net/
 
 Automated S3 that is linked to CloudFront: http://my-clothing-store.s3-website-us-east-1.amazonaws.com/ (403 AccessDenied after it is configured via cloudfront)
 
-Manually created in (5) S3, link to index.html https://my-cloth-store.s3.amazonaws.com/index.html
+Manually created in (5) S3, link to index.html https://my-cloth-store.s3.amazonaws.com/index.html(with access Denied)
+
+Manually Created in cloudfront, link to s3 - https://d1atf8h1cflafl.cloudfront.net/
 
 # React-shop-cloudfront
 
