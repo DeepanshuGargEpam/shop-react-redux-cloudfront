@@ -1,3 +1,10 @@
+# Links to the deployed ecommerce application
+Cloudfront ( automated ): https://d5gmxpfweshkm.cloudfront.net/
+
+Automated S3 that is linked to CloudFront: http://my-clothing-store.s3-website-us-east-1.amazonaws.com/ (403 AccessDenied after it is configured via cloudfront)
+
+Manually created in (5) S3, link to index.html https://my-cloth-store.s3.amazonaws.com/index.html
+
 # React-shop-cloudfront
 
 This is frontend starter project for nodejs-aws mentoring program. It uses the following technologies:
