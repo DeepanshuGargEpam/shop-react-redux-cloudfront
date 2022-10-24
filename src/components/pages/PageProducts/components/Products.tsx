@@ -7,9 +7,84 @@ import Typography from "@mui/material/Typography";
 import { formatAsPrice } from "~/utils/utils";
 import AddProductToCart from "~/components/AddProductToCart/AddProductToCart";
 import { useAvailableProducts } from "~/queries/products";
+import { useCallback, useEffect, useState } from 'react';
+import { product } from '../../../../models/products';
+import { fetchCars } from '../../../../api/fetchCars';
+
+// export default function Products() {
+//   // const { data = [], isLoading } = useAvailableProducts();
+//   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+//   const [data, setData] = useState<product[]>([]);
+
+//   const getCars = useCallback(async () => {
+//     try {
+//       const response = await fetchCars();
+//       setIsLoading(false);
+//       if (response.status === 200) {
+//         setData(response.data.cars);
+//       }
+//     } catch (error) {
+//       console.log(error);
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   }, [setIsLoading]);
+
+//   useEffect(() => {
+//     getCars();
+//   }, []);
+//   if (isLoading) {
+//     return <Typography>Loading...</Typography>;
+//   }
+
+//   return (
+//     <Grid container spacing={4}>
+//       {/* eslint-disable-next-line @typescript-eslint/no-unused-vars */}
+//       {data.map((car, index) => (
+//         <Grid item key={car.id} xs={12} sm={6} md={4}>
+//           <Card
+//             sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+//           >
+//             <CardMedia
+//               sx={{ pt: "56.25%" }}
+//               image={`${car.image}?sig=${index}`}
+//               // title={`${car.title}`}
+//             />
+//              <span style={{ padding: '10px' }}>
+//               {car.title} - Price: {car.price}
+//             </span>
+//           </Card>
+//         </Grid>
+//       ))}
+//     </Grid>
+//   );
+// }
 
 export default function Products() {
-  const { data = [], isLoading } = useAvailableProducts();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const [data, setData] = useState<product[]>([]);
+
+  const getCars = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const response = await fetchCars();
+      console.log(response)
+      setIsLoading(false);
+      if (response.status === 200) {
+        setData(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [setIsLoading, setData]);
+
+  useEffect(() => {
+    getCars();
+  }, []);
 
   if (isLoading) {
     return <Typography>Loading...</Typography>;
@@ -18,28 +93,27 @@ export default function Products() {
   return (
     <Grid container spacing={4}>
       {/* eslint-disable-next-line @typescript-eslint/no-unused-vars */}
-      {data.map(({ count, ...product }, index) => (
-        <Grid item key={product.id} xs={12} sm={6} md={4}>
+      {data.map((car, index) => (
+        <Grid item key={car.id} xs={12} sm={6} md={4}>
           <Card
-            sx={{ height: "100%", display: "flex", flexDirection: "column" }}
+            sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
           >
             <CardMedia
-              sx={{ pt: "56.25%" }}
-              image={`https://source.unsplash.com/random?sig=${index}`}
-              title="Image title"
+              sx={{ pt: '56.25%' }}
+              image={car.image}
             />
-            <CardContent sx={{ flexGrow: 1 }}>
-              <Typography gutterBottom variant="h5" component="h2">
-                {product.title}
-              </Typography>
-              <Typography>{formatAsPrice(product.price)}</Typography>
-            </CardContent>
-            <CardActions>
+
+            <span style={{ padding: '10px' }}>
+              {car.title} - Price: {car.price}
+            </span>
+
+            {/* <CardActions>
               <AddProductToCart product={product} />
-            </CardActions>
+            </CardActions> */}
           </Card>
         </Grid>
       ))}
     </Grid>
   );
 }
+
