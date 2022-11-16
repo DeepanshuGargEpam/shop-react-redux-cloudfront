@@ -2,7 +2,7 @@ export interface IApiHeaders {
   [key: string]: string;
 }
 
-type TypeMethod = 'POST' | 'GET' | 'DELETE';
+type TypeMethod = 'POST' | 'GET' | 'DELETE'|'PUT';
 
 export interface IApiFetch {
   method: TypeMethod;

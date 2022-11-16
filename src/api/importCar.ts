@@ -1,6 +1,6 @@
 import { apiFetch } from './apiFetch/apiFetch';
 
-export const fetchCars = (url: string) => {
+export const fetchImage = (url: string) => {
   return apiFetch({
     method: 'PUT',
     url,
